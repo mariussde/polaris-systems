@@ -28,7 +28,7 @@ function FloatingProduct({ rotation }: { rotation: [number, number, number] }) {
 }
 
 export const FloatingProductCard = () => {
-  const [isZoomEnabled, setIsZoomEnabled] = useState(true)
+  const [isZoomEnabled, setIsZoomEnabled] = useState(false)
 
   const handleZoomToggle = () => {
     setIsZoomEnabled(prev => !prev)
