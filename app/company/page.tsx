@@ -182,9 +182,10 @@ function About({
                 <p className={`mb-2 text-lg font-semibold ${!breakout?.src ? 'text-2xl bg-gradient-to-r from-foreground via-foreground/80 to-foreground bg-clip-text text-transparent' : ''}`}>{breakout?.title}</p>
                 <p className={`text-muted-foreground ${!breakout?.src ? 'text-base max-w-md mx-auto' : ''}`}>{breakout?.description}</p>
               </div>
-              <Button variant="outline" className={breakout?.src ? 'mr-auto' : 'mx-auto'} asChild>
-                <a href={breakout?.buttonUrl} target="_blank">
+              <Button variant="outline" className={breakout?.src ? 'mr-auto rounded-full' : 'mx-auto rounded-full'} asChild>
+                <a href={breakout?.buttonUrl}>
                   {breakout?.buttonText}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             </div>
@@ -263,7 +264,7 @@ export default function CompanyPage() {
       title: "Technology Excellence",
       description: "From space technology to web solutions, we deliver innovative software that drives business success. Our diverse portfolio includes Stellaris, custom landing pages, and enterprise-grade admin dashboards.",
       buttonText: "Explore Solutions",
-      buttonUrl: "/contact",
+      buttonUrl: "#contact",
     },
     companiesTitle: "Trusted by Industry Leaders",
     companies: companies,
