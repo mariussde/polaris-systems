@@ -3,30 +3,63 @@
 import { useRef, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { About3 } from "@/components/about3";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+interface AboutProps {
+  title?: string;
+  description?: string;
+  mainImage?: {
+    src: string;
+    alt: string;
+  };
+  secondaryImage?: {
+    src: string;
+    alt: string;
+  };
+  breakout?: {
+    src: string;
+    alt: string;
+    title?: string;
+    description?: string;
+    buttonText?: string;
+    buttonUrl?: string;
+  };
+  companiesTitle?: string;
+  companies?: Array<{
+    src: string;
+    alt: string;
+    className?: string;
+  }>;
+  achievementsTitle?: string;
+  achievementsDescription?: string;
+  achievements?: Array<{
+    label: string;
+    value: string;
+  }>;
+}
 
 const faqs = [
   {
-    question: "What is Polaris Systems and what do we do?",
+    question: "What solutions does Polaris Systems offer?",
     answer:
-      "Polaris Systems is a leading technology solutions provider, specializing in innovative software development and digital transformation. We offer comprehensive services including custom software development, cloud solutions, and digital strategy consulting.",
+      "We offer a comprehensive suite of software solutions including Stellaris (our space technology platform), custom landing pages, admin dashboards, and enterprise software solutions. Our expertise spans from web applications to specialized industry tools.",
   },
   {
-    question: "How long has Polaris Systems been in business?",
+    question: "How do you ensure quality across different products?",
     answer:
-      "With years of experience in the industry, Polaris Systems has established itself as a trusted partner in technology innovation and digital transformation.",
+      "Each product team at Polaris Systems follows rigorous development standards and best practices. Whether it's our space technology platform Stellaris or our web solutions, we maintain consistent quality through automated testing, code reviews, and continuous integration.",
   },
   {
-    question: "What makes Polaris Systems different from other tech companies?",
+    question: "Can you customize solutions for specific business needs?",
     answer:
-      "Our unique combination of technical expertise, innovative approach, and comprehensive service offerings sets us apart. We provide end-to-end solutions tailored to our clients' specific needs.",
+      "Absolutely! We specialize in tailoring our solutions to meet specific business requirements. From customizing admin dashboards to adapting our Stellaris platform for specific use cases, our team works closely with clients to deliver exactly what they need.",
   },
   {
-    question: "How can I partner with Polaris Systems?",
+    question: "What makes Polaris Systems different?",
     answer:
-      "We welcome partnerships with businesses of all sizes. Our team is ready to discuss how we can support your digital transformation and technology needs.",
+      "Our versatility and expertise across different domains sets us apart. We successfully deliver everything from sophisticated space technology solutions with Stellaris to beautiful, conversion-focused landing pages and powerful admin interfaces.",
   },
 ];
 
@@ -42,7 +75,7 @@ const departments = [
       },
       {
         id: "role-2",
-        title: "DevOps Engineer",
+        title: "Frontend Developer",
         location: "Global",
         href: "/careers",
       },
@@ -111,6 +144,95 @@ const companies = [
   },
 ];
 
+function About({
+  title,
+  description,
+  mainImage,
+  secondaryImage,
+  breakout,
+  companiesTitle,
+  companies,
+  achievementsTitle,
+  achievementsDescription,
+  achievements,
+}: AboutProps) {
+  return (
+    <section className="py-12">
+      <div className="container">
+        <div className="mb-14 grid gap-5 text-center md:grid-cols-2 md:text-left">
+          <h1 className="text-5xl font-semibold">{title}</h1>
+          <p className="text-muted-foreground">{description}</p>
+        </div>
+        <div className="grid gap-7 lg:grid-cols-3">
+          <img
+            src={mainImage?.src}
+            alt={mainImage?.alt}
+            className="size-full max-h-[620px] rounded-xl object-cover lg:col-span-2"
+          />
+          <div className="flex flex-col gap-7 md:flex-row lg:flex-col">
+            <div className={`flex flex-col justify-between gap-6 rounded-xl bg-muted p-7 md:w-1/2 lg:w-auto ${!breakout?.src ? 'items-center text-center bg-gradient-to-br from-background via-muted to-background border border-border/50' : ''}`}>
+              {breakout?.src && (
+                <img
+                  src={breakout.src}
+                  alt={breakout.alt}
+                  className="mr-auto h-12"
+                />
+              )}
+              <div className={breakout?.src ? '' : 'space-y-4'}>
+                <p className={`mb-2 text-lg font-semibold ${!breakout?.src ? 'text-2xl bg-gradient-to-r from-foreground via-foreground/80 to-foreground bg-clip-text text-transparent' : ''}`}>{breakout?.title}</p>
+                <p className={`text-muted-foreground ${!breakout?.src ? 'text-base max-w-md mx-auto' : ''}`}>{breakout?.description}</p>
+              </div>
+              <Button variant="outline" className={breakout?.src ? 'mr-auto' : 'mx-auto'} asChild>
+                <a href={breakout?.buttonUrl} target="_blank">
+                  {breakout?.buttonText}
+                </a>
+              </Button>
+            </div>
+            <img
+              src={secondaryImage?.src}
+              alt={secondaryImage?.alt}
+              className="grow basis-0 rounded-xl object-cover md:w-1/2 lg:min-h-0 lg:w-auto"
+            />
+          </div>
+        </div>
+        <div className="py-32">
+          <p className="text-center">{companiesTitle}</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-8">
+            {companies?.map((company, idx) => (
+              <div className="flex items-center gap-3" key={company.src + idx}>
+                <img
+                  src={company.src}
+                  alt={company.alt}
+                  className={company.className || "h-6 w-auto md:h-8"}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="relative overflow-hidden rounded-xl bg-muted p-10 md:p-16">
+          <div className="flex flex-col gap-4 text-center md:text-left">
+            <h2 className="text-4xl font-semibold">{achievementsTitle}</h2>
+            <p className="max-w-xl text-muted-foreground">
+              {achievementsDescription}
+            </p>
+          </div>
+          <div className="mt-10 flex flex-wrap justify-between gap-10 text-center">
+            {achievements?.map((item, idx) => (
+              <div className="flex flex-col gap-4" key={item.label + idx}>
+                <p>{item.label}</p>
+                <span className="text-4xl font-semibold md:text-5xl">
+                  {item.value}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="pointer-events-none absolute -top-1 right-1 z-10 hidden h-full w-full bg-[linear-gradient(to_right,hsl(var(--muted-foreground))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--muted-foreground))_1px,transparent_1px)] [mask-image:linear-gradient(to_bottom_right,#000,transparent,transparent)] bg-[size:80px_80px] opacity-15 md:block"></div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function CompanyPage() {
   const controls = useAnimation();
   const [ref, inView] = useInView({
@@ -124,6 +246,37 @@ export default function CompanyPage() {
     }
   }, [controls, inView]);
 
+  const aboutProps = {
+    title: "About Polaris Systems",
+    description: "We're a versatile software solutions provider, delivering everything from space technology to modern web applications. Our expertise spans across industries, helping businesses transform their digital presence and operations.",
+    mainImage: {
+      src: "/space/assembling-booster-landscape.jpg",
+      alt: "Modern technology workspace representing our diverse solutions",
+    },
+    secondaryImage: {
+      src: "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+      alt: "Team collaboration in a modern office setting",
+    },
+    breakout: {
+      src: "",
+      alt: "",
+      title: "Technology Excellence",
+      description: "From space technology to web solutions, we deliver innovative software that drives business success. Our diverse portfolio includes Stellaris, custom landing pages, and enterprise-grade admin dashboards.",
+      buttonText: "Explore Solutions",
+      buttonUrl: "/contact",
+    },
+    companiesTitle: "Trusted by Industry Leaders",
+    companies: companies,
+    achievementsTitle: "Our Impact",
+    achievementsDescription: "Delivering innovative solutions across multiple industries, from space technology to web applications.",
+    achievements: [
+      { label: "Active Products", value: "10+" },
+      { label: "Client Projects", value: "500+" },
+      { label: "Team Members", value: "100+" },
+      { label: "Client Satisfaction", value: "98%" },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-background">
       <section ref={ref} id="about" className="py-12 px-4 sm:px-6 lg:px-10 max-w-[1500px] mx-auto">
@@ -135,31 +288,7 @@ export default function CompanyPage() {
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
             }}
           >
-            <About3
-              title="About Polaris Systems"
-              description="Polaris Systems is a global leader in technology solutions and digital transformation, serving clients worldwide with excellence and innovation."
-              mainImage={{
-                src: "/space/assembling-booster-landscape.jpg",
-                alt: "Futuristic server room with blue lighting",
-              }}
-              secondaryImage={{
-                src: "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                alt: "Earth from space representing global reach",
-              }}
-              breakout={{
-                src: "",
-                alt: "",
-                title: "Technology Excellence",
-                description: "Delivering innovative technology solutions across the globe with precision and reliability.",
-                buttonText: "Learn More",
-                buttonUrl: "/contact",
-              }}
-              companiesTitle="Trusted by Industry Leaders"
-              companies={companies}
-              achievementsTitle="Our Global Impact"
-              achievementsDescription="Building a sustainable future through innovative technology solutions and global partnerships."
-              achievements={achievements}
-            />
+            <About {...aboutProps} />
           </motion.div>
         </div>
       </section>
