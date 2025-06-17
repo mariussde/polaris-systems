@@ -71,16 +71,16 @@ const About3 = ({
   title = "About Us",
   description = "Shadcnblocks is a passionate team dedicated to creating innovative solutions that empower businesses to thrive in the digital age.",
   mainImage = {
-    src: "https://shadcnblocks.com/images/block/placeholder-1.svg",
-    alt: "placeholder",
+    src: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    alt: "Professional team collaboration in modern office",
   },
   secondaryImage = {
-    src: "https://shadcnblocks.com/images/block/placeholder-2.svg",
-    alt: "placeholder",
+    src: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    alt: "Team meeting in modern office space",
   },
   breakout = {
-    src: "https://shadcnblocks.com/images/block/block-1.svg",
-    alt: "logo",
+    src: "https://images.pexels.com/photos/3183153/pexels-photo-3183153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    alt: "Business professionals discussing strategy",
     title: "Hundreds of blocks at Shadcnblocks.com",
     description:
       "Providing businesses with effective tools to improve workflows, boost efficiency, and encourage growth.",
@@ -107,17 +107,19 @@ const About3 = ({
             className="size-full max-h-[620px] rounded-xl object-cover lg:col-span-2"
           />
           <div className="flex flex-col gap-7 md:flex-row lg:flex-col">
-            <div className="flex flex-col justify-between gap-6 rounded-xl bg-muted p-7 md:w-1/2 lg:w-auto">
-              <img
-                src={breakout.src}
-                alt={breakout.alt}
-                className="mr-auto h-12"
-              />
-              <div>
-                <p className="mb-2 text-lg font-semibold">{breakout.title}</p>
-                <p className="text-muted-foreground">{breakout.description}</p>
+            <div className={`flex flex-col justify-between gap-6 rounded-xl bg-muted p-7 md:w-1/2 lg:w-auto ${!breakout.src ? 'items-center text-center bg-gradient-to-br from-background via-muted to-background border border-border/50' : ''}`}>
+              {breakout.src && (
+                <img
+                  src={breakout.src}
+                  alt={breakout.alt}
+                  className="mr-auto h-12"
+                />
+              )}
+              <div className={breakout.src ? '' : 'space-y-4'}>
+                <p className={`mb-2 text-lg font-semibold ${!breakout.src ? 'text-2xl bg-gradient-to-r from-foreground via-foreground/80 to-foreground bg-clip-text text-transparent' : ''}`}>{breakout.title}</p>
+                <p className={`text-muted-foreground ${!breakout.src ? 'text-base max-w-md mx-auto' : ''}`}>{breakout.description}</p>
               </div>
-              <Button variant="outline" className="mr-auto" asChild>
+              <Button variant="outline" className={breakout.src ? 'mr-auto' : 'mx-auto'} asChild>
                 <a href={breakout.buttonUrl} target="_blank">
                   {breakout.buttonText}
                 </a>

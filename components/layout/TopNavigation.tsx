@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X, Building2, Code2, Home, Briefcase, Wrench, HelpCircle, Users, Cloud, ShieldCheck, Bot, Phone, Coins } from 'lucide-react';
+import { Menu, X, Building2, Code2, Home, Briefcase, Wrench, HelpCircle, Users, Cloud, ShieldCheck, Bot, Phone, Coins, Rocket, Satellite } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -145,16 +145,16 @@ export default function TopNavigation() {
                       <li>
                         <NavigationMenuLink asChild>
                           <Link
-                            href="/products/services"
+                            href="/products/stellaris"
                             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                             onClick={(e) => e.currentTarget.blur()}
                           >
                             <div className="flex items-center gap-2 text-sm font-medium leading-none">
-                              <Briefcase className="h-4 w-4" />
-                              Services
+                              <Satellite className="h-4 w-4" />
+                              Stellaris
                             </div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                              Professional services and consulting
+                              Control and monitor our constellation of satellites.
                             </p>
                           </Link>
                         </NavigationMenuLink>
@@ -315,15 +315,15 @@ export default function TopNavigation() {
                       Software Solutions
                     </Link>
                     <Link
-                      href="/products/services"
+                      href="/products/stellaris"
                       onClick={(e) => {
                         setIsMobileMenuOpen(false);
                         e.currentTarget.blur();
                       }}
                       className="flex items-center gap-2 text-muted-foreground hover:text-foreground rounded-md px-3 py-2 transition-colors duration-200"
                     >
-                      <Briefcase className="h-4 w-4" />
-                      Services
+                      <Satellite className="h-4 w-4" />
+                      Stellaris
                     </Link>
                     <Link
                       href="/products/polaris-cloud"

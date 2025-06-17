@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { Mail, MapPin, Phone, Building2, Users, HelpCircle, Code2, Briefcase, Cloud, ShieldCheck, Bot, Coins, Check } from "lucide-react";
+import { Mail, MapPin, Phone, Building2, Users, HelpCircle, Code2, Satellite, Cloud, ShieldCheck, Bot, Coins, Check } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -152,9 +152,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/products/services" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
-                  <Briefcase className="h-4 w-4" />
-                  Services
+                <Link href="/products/stellaris" className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2">
+                  <Satellite className="h-4 w-4" />
+                  Stellaris
                 </Link>
               </li>
               <li>

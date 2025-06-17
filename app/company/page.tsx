@@ -126,8 +126,8 @@ export default function CompanyPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <section ref={ref} id="about" className="container mx-auto py-32">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10">
+      <section ref={ref} id="about" className="py-12 px-4 sm:px-6 lg:px-10 max-w-[1500px] mx-auto">
+        <div className="py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={controls}
@@ -139,16 +139,16 @@ export default function CompanyPage() {
               title="About Polaris Systems"
               description="Polaris Systems is a global leader in technology solutions and digital transformation, serving clients worldwide with excellence and innovation."
               mainImage={{
-                src: "https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                alt: "Mountain range representing our global reach",
+                src: "/space/assembling-booster-landscape.jpg",
+                alt: "Futuristic server room with blue lighting",
               }}
               secondaryImage={{
-                src: "https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                alt: "Winding path representing our journey",
+                src: "https://images.pexels.com/photos/2156/sky-earth-space-working.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+                alt: "Earth from space representing global reach",
               }}
               breakout={{
-                src: "https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                alt: "Concrete spheres representing balance and stability",
+                src: "",
+                alt: "",
                 title: "Technology Excellence",
                 description: "Delivering innovative technology solutions across the globe with precision and reliability.",
                 buttonText: "Learn More",
@@ -164,8 +164,8 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      <section id="faq" className="container mx-auto py-18">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10">
+      <section id="faq" className="py-12 px-4 sm:px-6 lg:px-10 max-w-[1500px] mx-auto">
+        <div className="border-t border-border py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={controls}
@@ -175,8 +175,10 @@ export default function CompanyPage() {
             className="text-center"
           >
             <Badge className="text-xs font-medium">FAQ</Badge>
-            <h2 className="mt-4 text-4xl font-semibold">Frequently Asked Questions</h2>
-            <p className="mt-6 font-medium text-muted-foreground">
+            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-crimson tracking-tight leading-tight text-foreground">
+              Frequently Asked Questions
+            </h2>
+            <p className="mt-6 text-muted-foreground">
               Find answers to common questions about our services and operations.
             </p>
           </motion.div>
@@ -195,7 +197,7 @@ export default function CompanyPage() {
                 </span>
                 <div>
                   <div className="mb-2 flex items-center justify-between">
-                    <h3 className="font-medium">{faq.question}</h3>
+                    <h3 className="font-medium text-foreground">{faq.question}</h3>
                   </div>
                   <p className="text-sm text-muted-foreground">{faq.answer}</p>
                 </div>
@@ -205,17 +207,20 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      <section id="careers" className="container mx-auto py-32">
-        <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10">
+      <section id="careers" className="py-12 px-4 sm:px-6 lg:px-10 max-w-[1500px] mx-auto">
+        <div className="border-t border-border py-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={controls}
             variants={{
               visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.6 } }
             }}
+            className="max-w-6xl mx-auto text-center"
           >
-            <h2 className="text-4xl font-medium md:text-6xl">Join Our Team</h2>
-            <p className="mt-6 whitespace-pre-wrap text-muted-foreground md:mb-20 md:text-lg">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-crimson tracking-tight leading-tight text-foreground">
+              Join Our Team
+            </h2>
+            <p className="mt-6 text-muted-foreground">
               Explore opportunities to be part of our global team.
             </p>
           </motion.div>
@@ -227,9 +232,9 @@ export default function CompanyPage() {
               variants={{
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.8 + index * 0.2 } }
               }}
-              className="mt-12 md:mt-20"
+              className="mt-12 md:mt-20 max-w-6xl mx-auto"
             >
-              <h3 className="mb-8 text-3xl font-medium md:text-4xl">
+              <h3 className="mb-8 text-2xl font-crimson tracking-tight leading-tight text-foreground md:text-3xl">
                 {department.title}
               </h3>
               <ul className="divide-y divide-border border-y border-border">
@@ -237,17 +242,17 @@ export default function CompanyPage() {
                   <li key={role.id} className="group">
                     <a 
                       href={role.href} 
-                      className="flex items-center py-6"
+                      className="flex items-center py-4"
                       tabIndex={0}
                       aria-label={`View details for ${role.title} position in ${role.location}`}
                     >
                       <div>
-                        <div className="font-medium md:text-lg">{role.title}</div>
-                        <div className="text-xs text-muted-foreground md:mt-2 md:text-sm">
+                        <div className="font-medium text-foreground text-base md:text-lg">{role.title}</div>
+                        <div className="text-xs text-muted-foreground md:mt-1 md:text-sm">
                           {role.location}
                         </div>
                       </div>
-                      <ArrowRight className="ml-auto size-6 -translate-x-6 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                      <ArrowRight className="ml-auto size-5 -translate-x-6 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
                     </a>
                   </li>
                 ))}
