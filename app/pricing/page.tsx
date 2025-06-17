@@ -1,8 +1,39 @@
 "use client";
 
-import { Pricing2 } from "@/components/pricing2";
+import { CircleCheck } from "lucide-react";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Switch } from "@/components/ui/switch";
+
+interface PricingFeature {
+  text: string;
+}
+
+interface PricingPlan {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: string;
+  yearlyPrice: string;
+  features: PricingFeature[];
+  button: {
+    text: string;
+    url: string;
+  };
+}
 
 export default function PricingPage() {
+  const [isYearly, setIsYearly] = useState(false);
+
   const pricingPlans = [
     {
       id: "basic",
@@ -87,15 +118,81 @@ export default function PricingPage() {
 
   return (
     <main className="min-h-screen bg-background font-dm-sans">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center">
-          <Pricing2
-            heading="Simple, Transparent Pricing"
-            description="Choose the perfect plan for your business needs"
-            plans={pricingPlans}
-          />
+      <section className="py-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 text-center">
+            <h2 className="text-4xl font-semibold text-pretty lg:text-6xl">
+              Simple, Transparent Pricing
+            </h2>
+            <div className="text-muted-foreground lg:text-xl">
+              Choose the perfect plan for your business needs
+            </div>
+            <div className="flex items-center gap-3 text-lg">
+              Monthly
+              <Switch
+                checked={isYearly}
+                onCheckedChange={() => setIsYearly(!isYearly)}
+              />
+              Yearly
+            </div>
+            <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {pricingPlans.map((plan) => (
+                <Card
+                  key={plan.id}
+                  className="relative flex min-h-[600px] flex-col text-left"
+                >
+                  <CardHeader>
+                    <CardTitle className="text-xl">
+                      {plan.name}
+                    </CardTitle>
+                    <p className="text-sm text-muted-foreground">
+                      {plan.description}
+                    </p>
+                    <div className="mt-4 flex items-end">
+                      {plan.monthlyPrice === "Custom" ? (
+                        <span className="text-4xl font-semibold">Custom</span>
+                      ) : plan.id === "one-time" ? (
+                        <span className="text-4xl font-semibold">€799</span>
+                      ) : (
+                        <>
+                          <span className="text-4xl font-semibold">
+                            {isYearly ? plan.yearlyPrice : plan.monthlyPrice}
+                          </span>
+                          <span className="text-2xl font-semibold text-muted-foreground">
+                            {isYearly ? "/yr" : "/mo"}
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <Separator className="mb-6" />
+                    <ul className="space-y-4">
+                      {plan.features.map((feature, index) => (
+                        <li
+                          key={index}
+                          className="flex items-center gap-2 text-sm"
+                        >
+                          <CircleCheck className="size-4 flex-shrink-0" />
+                          <span>{feature.text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                  <CardFooter className="mt-auto">
+                    <Button 
+                      asChild 
+                      className={`w-full ${plan.id === "custom" ? "bg-primary hover:bg-primary/90" : ""}`}
+                    >
+                      <a href={plan.button.url}>{plan.button.text}</a>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }
