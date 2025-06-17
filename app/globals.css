@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 71% 97%;
+    --foreground: 20 14% 4%;
+
+    --card: 40 71% 97%;
+    --card-foreground: 20 14% 4%;
+
+    --popover: 40 71% 97%;
+    --popover-foreground: 20 14% 4%;
+
+    --primary: 25 33% 39%;
+    --primary-foreground: 40 71% 98%;
+
+    --secondary: 40 10% 90%;
+    --secondary-foreground: 25 33% 39%;
+
+    --muted: 40 10% 93%;
+    --muted-foreground: 24 5% 45%;
+
+    --accent: 40 10% 90%;
+    --accent-foreground: 25 33% 39%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 40 10% 85%;
+    --input: 40 10% 88%;
+    --ring: 25 33% 39%;
+
+    --radius: 0.5rem;
+
+    --shadow-color: 25 33% 20%;
+    --shadow-strength: 0.07;
+  }
+
+  .dark {
+    --background: 21 15% 9%;
+    --foreground: 20 5% 85%;
+
+    --card: 21 15% 12%;
+    --card-foreground: 20 5% 85%;
+
+    --popover: 21 15% 9%;
+    --popover-foreground: 20 5% 85%;
+
+    --primary: 43 82% 68%;
+    --primary-foreground: 21 15% 9%;
+
+    --secondary: 21 15% 15%;
+    --secondary-foreground: 43 82% 68%;
+
+    --muted: 21 15% 15%;
+    --muted-foreground: 20 5% 64%;
+
+    --accent: 21 15% 15%;
+    --accent-foreground: 43 82% 68%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 21 15% 20%;
+    --input: 21 15% 22%;
+    --ring: 43 82% 68%;
+
+    --shadow-color: 21 15% 5%;
+    --shadow-strength: 0.1;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .shadow-sm {
+    box-shadow: 0 1px 2px 0 hsl(var(--shadow-color) / var(--shadow-strength));
+  }
+  .shadow {
+    box-shadow: 0 1px 3px 0 hsl(var(--shadow-color) / var(--shadow-strength)),
+                0 1px 2px -1px hsl(var(--shadow-color) / var(--shadow-strength));
+  }
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px hsl(var(--shadow-color) / var(--shadow-strength)),
+                0 2px 4px -2px hsl(var(--shadow-color) / var(--shadow-strength));
+  }
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px hsl(var(--shadow-color) / var(--shadow-strength)),
+                0 4px 6px -4px hsl(var(--shadow-color) / var(--shadow-strength));
+  }
+}
