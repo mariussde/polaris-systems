@@ -10,7 +10,7 @@ import { useTheme } from "next-themes";
 
 export default function Hero() {
   const controls = useAnimation();
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -27,6 +27,11 @@ export default function Hero() {
     }
   }, [controls, inView]);
 
+  // Don't render the image until mounted and theme is resolved
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === 'dark';
+  
   return (
     <header ref={ref} className="pt-6 pb-10 px-4 sm:px-6 lg:px-10 max-w-[1500px] mx-auto">
       <div className="relative pt-12 md:pt-24"> 
@@ -116,7 +121,7 @@ export default function Hero() {
                 <div className="absolute inset-0 rounded-xl sm:rounded-2xl border border-muted-foreground/20 z-10 pointer-events-none [mask-image:linear-gradient(to_bottom,black,black_85%,transparent)]" />
                 <Image
                   className="object-contain rounded-xl sm:rounded-2xl"
-                  src={mounted && theme === 'dark' ? "/landing-page/app-dark.png" : "/landing-page/app-light.png"}
+                  src={isDark ? "/landing-page/app-dark.png" : "/landing-page/app-light.png"}
                   alt="app screen"
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"

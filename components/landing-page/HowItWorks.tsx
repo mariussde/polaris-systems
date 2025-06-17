@@ -9,20 +9,24 @@ import Image from 'next/image';
 import { useTheme } from "next-themes";
 
 function ProcessImage() {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  if (!mounted) return null;
+
+  const isDark = resolvedTheme === 'dark';
+
   return (
     <div className="relative">
       <div className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-30%" />
       <div className="bg-gradient-to-r from-background via-background/50 to-transparent absolute inset-0 z-10" />
       <Image
-        src={mounted && theme === 'dark' ? "/landing-page/charts.png" : "/landing-page/charts-light.png"}
-        alt={mounted && theme === 'dark' ? "Process visualization dark theme" : "Process visualization light theme"}
+        src={isDark ? "/landing-page/charts.png" : "/landing-page/charts-light.png"}
+        alt={isDark ? "Process visualization dark theme" : "Process visualization light theme"}
         width={1157}
         height={868}
         className="rounded-r-[15px]"
