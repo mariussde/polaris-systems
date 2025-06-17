@@ -1,11 +1,12 @@
 'use client'
 
-import { useRef, Suspense } from 'react'
+import { useRef, Suspense, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, ContactShadows, OrbitControls } from '@react-three/drei'
 import { Group } from 'three'
 import { GLTF } from 'three-stdlib'
 import * as THREE from 'three'
+import { ZoomIn, ZoomOut } from 'lucide-react'
 
 function FloatingProduct({ rotation }: { rotation: [number, number, number] }) {
   const ref = useRef<Group>(null)
@@ -27,8 +28,26 @@ function FloatingProduct({ rotation }: { rotation: [number, number, number] }) {
 }
 
 export const FloatingProductCard = () => {
+  const [isZoomEnabled, setIsZoomEnabled] = useState(true)
+
+  const handleZoomToggle = () => {
+    setIsZoomEnabled(prev => !prev)
+  }
+
   return (
-    <div className="w-full h-full rounded-lg bg-gray-200">
+    <div className="w-full h-full rounded-lg bg-gray-200 relative">
+      <button
+        onClick={handleZoomToggle}
+        className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 hover:bg-white shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
+        aria-label={isZoomEnabled ? "Disable zoom" : "Enable zoom"}
+        tabIndex={0}
+      >
+        {isZoomEnabled ? (
+          <ZoomOut className="w-5 h-5 text-gray-700" />
+        ) : (
+          <ZoomIn className="w-5 h-5 text-gray-700" />
+        )}
+      </button>
       <Canvas camera={{ position: [0, 0, 4], fov: 40 }}>
         <Suspense fallback={null}>
           <color attach="background" args={['#f8f8f8']} />
@@ -66,7 +85,7 @@ export const FloatingProductCard = () => {
           />
           <FloatingProduct rotation={[0.3, Math.PI / 1.6, 0]} />
           <OrbitControls 
-            enableZoom={true}
+            enableZoom={isZoomEnabled}
             enablePan={false}
             minDistance={2}
             maxDistance={8}

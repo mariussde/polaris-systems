@@ -109,7 +109,12 @@ export default function TopNavigation() {
           >
             <NavigationMenu>
               <NavigationMenuList className="flex items-center gap-1 px-4 py-1">
-              <NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/" onClick={(e) => e.currentTarget.blur()} className={cn(navigationMenuTriggerStyle(), "bg-transparent text-sm rounded-full")}>
+                    <Home className="h-4 w-4 " />
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
                   <Link href="/company" onClick={(e) => e.currentTarget.blur()} className={cn(navigationMenuTriggerStyle(), "bg-transparent text-sm rounded-full")}>
                     Company
                   </Link>
@@ -268,6 +273,19 @@ export default function TopNavigation() {
               className="absolute top-full left-0 w-full bg-card/95 backdrop-blur-lg shadow-lg rounded-b-2xl"
             >
               <div className="px-4 py-4 space-y-4">
+                {/* Home Section */}
+                <Link
+                  href="/"
+                  onClick={(e) => {
+                    setIsMobileMenuOpen(false);
+                    e.currentTarget.blur();
+                  }}
+                  className="flex items-center gap-2 px-3 font-semibold text-sm text-foreground mb-2"
+                >
+                  <Home className="h-4 w-4" />
+                  Home
+                </Link>
+
                 {/* Company Section */}
                 <Link
                     href="/company"
